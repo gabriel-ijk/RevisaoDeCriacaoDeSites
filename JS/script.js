@@ -33,7 +33,50 @@ btnSaveNote.addEventListener("click", (evt)=>{
         id: document.querySelector("#input-id").value,
         title:document.querySelector("#input-title").value,
         content:document.querySelector("#input-content").value,
-    }
-    [{title:"Save", content: "sdbmsdf,sdf", lasDate:"06/03/2024"}]
+    };
+    saveNote(data);
 
 })
+
+
+
+
+/*FUNÇÕES
+ let notes = localStorage.getItem('note');
+   if(!notes){
+    notes=[];
+   }
+   else{
+    notes = JSON.parse(notes);
+   }
+*/
+
+const saveNote = (note) =>{
+   let notes = loadNotes();
+
+
+   note.lastTime = new Date ().getTime();
+   console.log(note.lastTime)
+   if(note.id.length > 0){
+
+   }
+   else{
+    note.id = new Date().getTime();
+   }
+    notes.push(note);
+    notes = JSON.stringify(notes);
+    localStorage.setItem('notes', notes)
+};
+
+
+
+const loadNotes= () => {
+    let notes = localStorage.getItem('notes');
+   if(!notes){
+    notes=[];
+   }
+   else{
+    notes = JSON.parse(notes);
+   }
+   return notes;
+}
